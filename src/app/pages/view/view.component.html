@@ -1,0 +1,21 @@
+<section [class.edit]="isEditMode">
+  <div class="why-us-grid">
+    <div>
+      <i (click)="arrowRight()" class="fas fa-chevron-right"></i>
+    </div>
+    <div class="wrap-carusale">     
+      <div *ngFor="let w of carusaleArr; index as i" class="inner-wrap-caruale">
+          <div class="slide active-right" *ngIf="currentView.index == i && !w.isImg" >
+              {{w.text}}
+          </div>
+          <div class="slide active-right" *ngIf="currentView.index == i && w.isImg" >
+             <img [src]="w.text" alt="">
+          </div>
+      </div>
+    </div>
+    <div>
+      <i (click)="arrowLeft()" class="fas fa-chevron-left"></i>
+    </div>
+  </div>
+
+</section>
