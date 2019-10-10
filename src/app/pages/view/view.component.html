@@ -5,11 +5,11 @@
     </div>
     <div class="wrap-carusale">     
       <div *ngFor="let w of carusaleArr; index as i" class="inner-wrap-caruale">
-          <div class="slide active-right" *ngIf="currentView.index == i && !w.isImg" >
+          <!-- <div (click)="changeByIndex(i)" class="slide active-right" *ngIf="(currentView.index == i && !w.isImg) || toViewAll">
               {{w.text}}
-          </div>
-          <div class="slide active-right" *ngIf="currentView.index == i && w.isImg" >
-             <img [src]="w.text" alt="">
+          </div> -->
+          <div  class="slide active-right" *ngIf="(currentView.index == i) || toViewAll">
+             <img (click)="changeByIndex(i)" [src]="w.text" alt="">
           </div>
       </div>
     </div>
@@ -17,5 +17,10 @@
       <i (click)="arrowLeft()" class="fas fa-chevron-left"></i>
     </div>
   </div>
-
 </section>
+
+<!-- <section *ngIf="toViewAll">
+  <div *ngFor="let w of carusaleArr; index as i">
+
+  </div>
+</section> -->
