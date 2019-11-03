@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../services/firestore.service';
 import { ActivatedRoute } from '@angular/router';
+import { GithubService } from '../../services/github.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -8,38 +10,46 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewComponent implements OnInit {
 
- carusaleArr: ICarusale[] = [
-    // { index: 0,  text: "בית הדין לעבודה הורה להסתדרות האחיות ונציגי משרד האוצר לצאת להליך גישור, שבמהלכו יוכלו האחיות לשמור על זכותן לנקוט עיצומים ולמשרד הבריאות תישמר האפשרות לקצץ בשכרן. יוכך" },
-    // { index: 1,  isImg : false, text: "בית הדין לעבודה הורה להסתדרות האחיות ונציגי משרד האוצר לצאת לה34534536ליך גישור, שבמהלכו יוכלו4564564 האחיות לשמור על זכותן לנקוט עיצומים ולמשרד הבריאות תישמר האפשרות לקצץ בשכרן. יוכך" },
-    // { index: 2, isImg : false,  text: "בית הדין לעבודה הורה להסתדרות האחיות ונציגי משרד האוצר לצאת להליך גישור, שבמהלכו 7567567יוכלו האחיות ל09-90-hjkhjשמור על זכותן לנקוט עיצומים ולמשרד הבריאות תישמר האפש90-90-רות לקצץ בשכרן. יוכך" },
-    // { index: 3,  isImg : true,  text : "assets/img/1.jpg" }
-  ]
+ carusaleArr: ICarusale[] = [];
   currentView: ICarusale;
   isEditMode : boolean;
   toViewAll : boolean;
-  count : Number;
-  constructor(private svc: FirestoreService, private route : ActivatedRoute) {
-    this.svc.getCount().subscribe((res : any) =>{
-      this.count = res.data().count;
-       for (let i = 1; i <= this.count; i++) {
-        this.carusaleArr.push({index : i, text : "https://github.com/moshe-l/presentation-ui/tree/master/src/assets/img/"+ i + ".png" })
-       
-       }
-    });
-
-    this.svc.listen().subscribe((res : IRes) =>{
-     this.count = res.count; 
-     this.currentView = this.carusaleArr.find(x => x.index == res.current);
-    });
-    this.route.params.subscribe(p => {
+  bg: string;
+  title:string;
+  constructor(private svc: FirestoreService,private github : GithubService, private route : ActivatedRoute, private sanitizer: DomSanitizer) {
+      this.route.params.subscribe(p => {
       if(p['isEdit'] == "1")      
         this.isEditMode = true;      
       else if(p['isEdit'] == "2")
        this.toViewAll = true;
     })   
-   
-  
+
+    this.github.get('img').subscribe((res : any)=>{    
+     res.sort((a , b) => Number.parseInt(a.name.split('.')[0]) - Number.parseInt(b.name.split('.')[0]));    
+      for (let i = 0; i < res.length; i++) {
+            this.carusaleArr.push({index : i, text : res[i].download_url })
+       }      
+       this.startListening();      
+    }) 
+
+    this.github.get('bg').subscribe((res : any)=>{  
+      document.getElementsByTagName("body")[0].style.background =     
+      "linear-gradient(rgba(224, 209, 209, 0.7), rgba(218, 202, 202, 0.7)), url(" + res[0].download_url + ") no-repeat center center fixed"     
+     }) 
+
+
+     this.github.getTitle().subscribe((res : any)=>{    
+     this.title = res;  
+     }) 
+
+
 }
+
+ startListening(){
+  this.svc.listen().subscribe((res : IRes) =>{    
+    this.currentView = this.carusaleArr.find(x => x.index == res.current);
+   });
+ }
 
   changeByIndex(id){
     if(this.toViewAll)
@@ -60,7 +70,9 @@ export class ViewComponent implements OnInit {
     else
     this.svc.change(this.currentView.index - 1);
   }
-
+  sanitize(style: string) {
+    return this.sanitizer.bypassSecurityTrustStyle(style);
+  }
   ngOnInit() {
   }
 
@@ -75,5 +87,4 @@ export interface ICarusale {
 
 export interface IRes{
   current : number;
-  count : Number;
 }

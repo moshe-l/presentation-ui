@@ -1,14 +1,16 @@
-<section [class.edit]="isEditMode">
-  <div class="why-us-grid">
+<section [class.edit]="isEditMode" [class.viewAll]="toViewAll">
+  <!-- [style]="sanitize('background:'+bg + 'background-size: cover;')" -->
+  <h2>{{title}}</h2>
+  <div class="why-us-grid" >
     <div>
       <i (click)="arrowRight()" class="fas fa-chevron-right"></i>
     </div>
-    <div class="wrap-carusale">     
+    <div *ngIf="currentView" class="wrap-carusale">     
       <div *ngFor="let w of carusaleArr; index as i" class="inner-wrap-caruale">
           <!-- <div (click)="changeByIndex(i)" class="slide active-right" *ngIf="(currentView.index == i && !w.isImg) || toViewAll">
               {{w.text}}
           </div> -->
-          <div  class="slide active-right" *ngIf="(currentView.index == i) || toViewAll">
+          <div class="slide active-right" *ngIf="(currentView.index == i) || toViewAll">
              <img (click)="changeByIndex(i)" [src]="w.text" alt="">
           </div>
       </div>

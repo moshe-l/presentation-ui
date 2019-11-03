@@ -1,0 +1,20 @@
+<section>
+    <input type="button" routerLink="/expenses-view" value="תצוגה" >
+    <hr>
+  <h1>הגדרות</h1>
+  <div>
+    <div>מכולת :</div>
+    <input type="number" [(ngModel)]="setting.grocery">
+  </div>
+  <div>
+      <div>בית :</div>
+      <input type="number" [(ngModel)]="setting.home">
+    </div>
+    <div>
+        <div>בילויים :</div>
+        <input type="number" [(ngModel)]="setting.entertainment">
+      </div>
+      <div>
+        <input type="button" value="שמור" (click)="save()" >
+      </div>
+</section>

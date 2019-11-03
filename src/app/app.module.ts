@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
@@ -8,6 +8,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ViewComponent } from './pages/view/view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { OrHahaimComponent } from './pages/or-hahaim/or-hahaim.component';
+import { ExpensesSettingComponent } from './pages/expenses/expenses-setting/expenses-setting.component';
+import { ExpensesViewComponent } from './pages/expenses/expenses-view/expenses-view.component';
 
  const config = {
   apiKey: "AIzaSyDe7Glr4HAVGmZT1NMcW0DOJIrHJFyGYNY",
@@ -23,11 +27,16 @@ import { ViewComponent } from './pages/view/view.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ViewComponent
+    ViewComponent,
+    OrHahaimComponent,
+    ExpensesSettingComponent,
+    ExpensesViewComponent
   
   ],
   imports: [
     BrowserModule,
+    FormsModule ,
+    HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // firestore

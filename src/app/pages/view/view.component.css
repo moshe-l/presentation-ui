@@ -3,6 +3,14 @@
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     justify-items: center;
+    height: calc(100% - 27px);
+    position: fixed;
+    width:95%;
+    /* background: url("https://raw.githubusercontent.com/moshe-l/presentation-images/master/bg/shas.jpg") no-repeat center center fixed */
+    /* background-size: cover; */
+}
+.viewAll .why-us-grid{
+    position:static;
 }
 .inner-wrap-caruale{
     overflow-x: hidden;
@@ -13,10 +21,14 @@ section{
 }
 
 i{display: none}
+
 .edit i{
     display: inherit;
 }
 
+img{
+    width: 100%;
+}
 
 
 .slide {   
@@ -26,8 +38,6 @@ i{display: none}
 .slide.active-right{
   animation: slide-right 0.6s forwards;
 }
-
-
 
 @keyframes slide-right {
     0% {

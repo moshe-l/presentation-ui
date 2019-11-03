@@ -1,0 +1,164 @@
+<section>
+  <div class="top-div">
+    <div class="besad">בס"ד</div>
+    <input class="top-btn" type="button" routerLink="/expenses-setting" value="הגדרות">
+  </div>
+
+  <hr>
+  <h2>הוספת פריט חדש:</h2>
+  <form class="add-form" (ngSubmit)="add()">
+
+    <div class="input-effect">
+      <input class="effect-19" [class.has-content]="expens.desc" name="desc" [(ngModel)]="expens.desc" type="text"
+        placeholder="">
+      <label>תיאור</label>
+      <span class="focus-border">
+        <i></i>
+      </span>
+    </div>
+
+    <div class="input-effect">
+      <input class="effect-19" [class.has-content]="expens.amount" type="number" name="amount"
+        [(ngModel)]="expens.amount" placeholder="">
+      <label>סכום</label>
+      <span class="focus-border">
+        <i></i>
+      </span>
+    </div>
+
+    <div class="input-effect">
+      <input class="effect-19" type="date" [class.has-content]="expens.date" name="date" (input)="expens.date=parseDate($event.target.value)"
+        placeholder="">
+      <label>תאריך</label>
+      <span class="focus-border">
+        <i></i>
+      </span>
+    </div>
+
+    <div class="input-effect">
+      <select name="type" [(ngModel)]="expens.type">
+        <option hidden value="null" disabled="true" [selected]="true">סוג </option>
+        <!-- <option selected="selected" value="סוג">סוג</option> -->
+        <option value="home">בית</option>
+        <option value="grocery">מכולת</option>
+        <option value="entertainment">בילויים</option>
+      </select>
+      <!-- <label>סוג</label> -->
+      <span class="focus-border">
+        <i></i>
+      </span>
+    </div>
+    <!-- <div>
+      תיאור:
+      <input type="text" name="desc" [(ngModel)]="expens.desc" placeholder="תיאור">
+    </div> -->
+    <!-- <br> -->
+    <!-- <div>
+      סכום:
+        <input type="number" name="amount" [(ngModel)]="expens.amount" placeholder="סכום">
+    </div> -->
+    <!-- <br> -->
+    <!-- <div>
+      תאריך:
+        <input type="date" name="date" (input)="expens.date=parseDate($event.target.value)"  placeholder="תאריך">
+    </div> -->
+    <!-- <br> -->
+    <!-- <div>
+      סוג:
+      <select name="type" [(ngModel)]="expens.type">
+        <option value="home">בית</option>
+        <option  value="grocery">מכולת</option>
+        <option value="entertainment">בילויים</option>
+      </select>
+    </div> -->
+    <!-- <br> -->
+    <input class="top-btn" type="submit" value="הוספה">
+  </form>
+  <hr>
+  <h2>חיפוש חודש:</h2>
+  <form class="sform">
+    <select class="select-css" name="smonth" [(ngModel)]="month">
+      <option [selected]="i == month ? 'selected' : '' " [value]="i" *ngFor="let m of monthNames index as i">{{m}}
+      </option>
+    </select>
+    <select class="select-css" name="syear" [(ngModel)]="year">
+      <option [selected]="year == 2019" value="2019">2019</option>
+      <option [selected]="year == 2020" value="2020">2020</option>
+      <option [selected]="year == 2021" value="2021">2021</option>
+      <option [selected]="year == 2022" value="2022">2022</option>
+    </select>
+    <input type="button" class="top-btn" value="חיפוש" (click)="getPerMonth()">
+
+  </form>
+  <h3>חודש : {{currentMonthName}} - {{year}}</h3>
+  <hr>
+
+
+  <h2>יתרות וסיכומים:</h2>
+
+  <table>
+    <tr>
+    <th>
+      סוג
+    </th>
+    <th>
+      סה"כ
+    </th>
+    <th>
+      יתרה
+    </th>
+  </tr>
+  <tr>
+      <td>מכולת</td>
+      <td>{{grocerySum}}</td>
+      <td>{{groceryBalance}}</td>
+
+  </tr>
+  <tr>
+      <td>בית</td>
+      <td>{{homeSum}}</td>
+      <td>{{homeBalance}}</td>
+  </tr>
+  <tr>
+      <td>בילויים</td>
+      <td>{{entertainmentSum}}</td>
+      <td>{{entertainmentBalance}}</td>
+  </tr>
+  <tr>
+      <td>סה"כ</td>
+      <td>{{fullSum}}</td>
+      <td>{{groceryBalance + homeBalance + entertainmentBalance }}</td>
+  </tr>
+  </table>
+  
+  <hr>
+  <h2>פירוט:</h2>
+  <table>
+    <tr>
+      <th>
+        תאור
+      </th>
+      <th>
+        סכום
+      </th>
+      <th>
+        סוג
+      </th>
+      <th>
+        תאריך
+      </th>
+      <th>
+        מחיקה
+      </th>
+    </tr>
+    <tr *ngFor="let e of selectedMonthExpenses">
+      <td>{{e.desc}}</td>
+      <td>{{e.amount}}</td>
+      <td>{{getType(e.type) }}</td>
+      <td>{{e.date | date : 'dd/MM/yy'}}</td>
+      <td (click)="deleteItem(e)">X</td>
+    </tr>
+  </table>
+  <hr>
+ 
+</section>

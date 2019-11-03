@@ -1,0 +1,50 @@
+<!-- <p>
+<input type="text" name="name" (keydown.enter)="send()" [(ngModel)]="name" >
+<input type="button" value="send"  (click)="send()">
+</p> -->
+<section>
+
+  <h1>אור החיים</h1>
+
+
+<table id="customers">
+    <tr>
+      <th>פרשה</th>
+      <th>
+        א
+        <div class="student-name">אורן</div>
+      </th>
+      <th>       
+        ב
+        <div class="student-name">שי</div>
+      </th>
+      <th>ג
+          <div class="student-name">משה</div>
+      </th>
+      <th>ד
+          <div class="student-name">אורן</div>
+      </th>
+      <th>ה
+          <div class="student-name">שי</div>
+      </th>
+      <th>ו
+          <div class="student-name">משה</div>
+      </th>
+      <th>ז
+          <div class="student-name">יאיר</div>
+      </th>    
+    </tr>
+    <tr *ngFor="let p of toraList">
+      <td class="namep" [class.bookName]="isBookName(p.bookId)" >{{p.name}}</td>
+      <td><input (change)="update(p.guid,'first', $event)" type="checkbox" [(ngModel)]="p.first"></td>
+      <td><input (change)="update(p.guid,'second', $event)" type="checkbox" [(ngModel)]="p.second"></td>
+      <td><input (change)="update(p.guid,'third', $event)" type="checkbox" [(ngModel)]="p.third"></td>
+      <td><input (change)="update(p.guid,'fourth', $event)" type="checkbox" [(ngModel)]="p.fourth"></td>
+      <td><input (change)="update(p.guid,'fifth', $event)" type="checkbox" [(ngModel)]="p.fifth"></td>
+      <td><input (change)="update(p.guid,'sixth', $event)" type="checkbox" [(ngModel)]="p.sixth"></td>
+      <td><input (change)="update(p.guid,'seventh', $event)" type="checkbox" [(ngModel)]="p.seventh"></td>     
+    </tr>  
+  </table>
+
+
+</section>
