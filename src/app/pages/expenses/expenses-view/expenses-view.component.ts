@@ -103,6 +103,7 @@ export class ExpensesViewComponent implements OnInit {
   }
 
   calcBalances() {
+    
     this.groceryBalance = this.calcBalance('grocery');
     this.homeBalance = this.calcBalance('home');
     this.entertainmentBalance = this.calcBalance('entertainment');
