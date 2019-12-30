@@ -16,16 +16,26 @@ export class ViewComponent implements OnInit {
   toViewAll : boolean;
   bg: string;
   title:string;
+  imgHeight : string;
   constructor(private svc: FirestoreService,private github : GithubService, private route : ActivatedRoute, private sanitizer: DomSanitizer) {
       this.route.params.subscribe(p => {
       if(p['isEdit'] == "1")      
         this.isEditMode = true;      
       else if(p['isEdit'] == "2")
        this.toViewAll = true;
+      this.imgHeight = (window.innerHeight -50)+ "px";
+      console.log(window.innerHeight);
     })   
 
-    this.github.get('img').subscribe((res : any)=>{    
-     res.sort((a , b) => Number.parseInt(a.name.split('.')[0]) - Number.parseInt(b.name.split('.')[0]));    
+    this.github.get('img').subscribe((res : any)=>{  
+      res.forEach(element => {
+        console.log( element.name.split('.')[0].replace(/\D/g,''))
+      });
+     res.sort((a , b) =>
+      Number.parseInt((a.name.split('.')[0]).replace(/\D/g,'')) 
+      - 
+      Number.parseInt((b.name.split('.')[0]).replace(/\D/g,'')));    
+      // console.log(res)  
       for (let i = 0; i < res.length; i++) {
             this.carusaleArr.push({index : i, text : res[i].download_url })
        }      

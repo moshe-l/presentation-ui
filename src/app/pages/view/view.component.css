@@ -29,7 +29,11 @@ i{display: none}
 img{
     width: 100%;
 }
-
+@media(min-width:800px){
+    img{
+        width: 80%;
+    }
+}
 
 .slide {   
     opacity: 0;
