@@ -68,14 +68,15 @@ export class FirestoreService {
   }
   getExpensesPerMonth(year , month){
     console.log(year + " " + month)
+
     var startStr = `${year}-${Number.parseInt(month) + 1}-01`;
     var endStr = `${year}-${Number.parseInt(month) + 1}-31`;
     console.log(startStr + " " + endStr)
     let start = new Date(startStr);
     let end = new Date(endStr);
-   
     console.log(start + " " + end)
-    return this.db.collection('expenses', ref => ref.where('date', '>=', start).where('date', '<=', end)).get();
+    return this.db.collection('expenses', ref => ref.where('date', '>=', start).where('date', '<=', end)).get()
+   
   }
   deleteExspensItem(id){
     return this.db.collection('expenses').doc(id).delete();

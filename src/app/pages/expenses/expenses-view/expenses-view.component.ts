@@ -84,7 +84,6 @@ export class ExpensesViewComponent implements OnInit {
       this.year = date.getFullYear();
     }
     this.currentMonthName = this.monthNames[this.month];
-
     this.svc.getExpensesPerMonth(this.year, this.month)
       .subscribe(res => {
         this.selectedMonthExpenses = res.docs.map((i) => { return { id: i.id, ...i.data() } });
@@ -101,7 +100,7 @@ export class ExpensesViewComponent implements OnInit {
         }
 
 
-      })
+      }, err => alert(err))
   }
 
   calcBalances() {
