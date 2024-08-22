@@ -8,7 +8,7 @@ import { FirestoreService } from '../../../services/firestore.service';
   styleUrls: ['./expenses-view.component.css']
 })
 export class ExpensesViewComponent implements OnInit {
-  expens: Expens = { tempId: null, amount: null, date: new Date(), desc: "", type: null };
+  expens: Expens = { tempId: null, amount: null, date: new Date(), desc: "", type: null, payments: 1 };
   //oldExpenses: any;
 
   monthNames = ["ינואר", "פבואר", "מרץ", "אפריל", "מאי", "יוני",
@@ -43,14 +43,16 @@ export class ExpensesViewComponent implements OnInit {
       alert("מלאו את כל השדות חבר'ה");
       return;
     }
+   // let originalDate = this.expens.date;
     this.svc.addItem(this.expens).then(res => {
       alert("הפעולה בוצעה בהצלחה!!!")
+
       if (this.expens.date.getMonth() == this.month) {
-        this.expens.tempId = res.id;
+        this.expens.tempId = res[0].id;
         this.selectedMonthExpenses.push(this.expens);
         this.calcBalances();
       }
-      this.expens = { tempId: null, amount: null, date: new Date(), desc: "", type: null };
+      this.expens = { tempId: null, amount: null, date: new Date(), desc: "", type: null, payments: 1 };
     }).catch(err => {
       alert("שגיאה : " + err);
     });
@@ -168,6 +170,7 @@ export interface Expens {
   date: Date;
   desc: string;
   type: expensType;
+  payments:number;
 }
 
 export enum expensType {

@@ -55,7 +55,13 @@ export class FirestoreService {
   }
   
   addItem(item){
-   return this.db.collection('expenses').add(item);
+    var p = []
+    for (let index = 0; index < item.payments; index++) {
+      const element = {...item, date: new Date(item.date)}
+      element.date.setMonth(item.date.getMonth() + index);
+      p.push(this.db.collection('expenses').add(element));
+    }
+    return Promise.all(p);
   }
   getAll(){
     return this.db.collection('expenses').get();
