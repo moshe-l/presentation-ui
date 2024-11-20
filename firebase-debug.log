@@ -1,0 +1,30 @@
+[debug] [2024-08-22T20:42:15.056Z] ----------------------------------------------------------------------
+[debug] [2024-08-22T20:42:15.060Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2024-08-22T20:42:15.060Z] CLI Version:   13.15.4
+[debug] [2024-08-22T20:42:15.061Z] Platform:      win32
+[debug] [2024-08-22T20:42:15.061Z] Node Version:  v20.14.0
+[debug] [2024-08-22T20:42:15.061Z] Time:          Thu Aug 22 2024 23:42:15 GMT+0300 (Israel Daylight Time)
+[debug] [2024-08-22T20:42:15.061Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-22T20:42:15.111Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-22T20:42:15.112Z] > authorizing via signed-in user (mmm129m@gmail.com)
+[debug] [2024-08-22T20:42:15.112Z] [iam] checking project presentation-87078 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-08-22T20:42:15.112Z] > refreshing access token with scopes: []
+[debug] [2024-08-22T20:42:15.114Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-08-22T20:42:15.114Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-22T20:42:15.375Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-08-22T20:42:15.376Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-22T20:42:15.385Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/presentation-87078:testIamPermissions [none]
+[debug] [2024-08-22T20:42:15.385Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/presentation-87078:testIamPermissions x-goog-quota-user=projects/presentation-87078
+[debug] [2024-08-22T20:42:15.385Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/presentation-87078:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-22T20:42:16.356Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/presentation-87078:testIamPermissions 200
+[debug] [2024-08-22T20:42:16.357Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/presentation-87078:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-22T20:42:16.358Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/presentation-87078 [none]
+[debug] [2024-08-22T20:42:16.669Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/presentation-87078 200
+[debug] [2024-08-22T20:42:16.669Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/presentation-87078 {"projectId":"presentation-87078","projectNumber":"1023703306091","displayName":"presentation","name":"projects/presentation-87078","resources":{"hostingSite":"presentation-87078","realtimeDatabaseInstance":"presentation-87078","storageBucket":"presentation-87078.appspot.com","locationId":"asia-northeast1"},"state":"ACTIVE","etag":"1_1c5ebd8b-1501-48c7-b9f1-64f88f0d176b"}
+[info] 
+[info] === Deploying to 'presentation-87078'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-08-22T20:42:16.675Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/presentation-87078/versions [none]
+[debug] [2024-08-22T20:42:16.675Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/presentation-87078/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
